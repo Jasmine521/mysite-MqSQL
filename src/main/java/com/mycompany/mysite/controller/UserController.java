@@ -10,6 +10,7 @@ import com.mycompany.mysite.domain.User;
 import com.mycompany.mysite.service.UserService;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Table;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -34,6 +35,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * @author WIN11
  */
 @Controller
+@Table(name = "USERS")
 public class UserController {
     final Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
@@ -80,11 +82,13 @@ public class UserController {
                 User u = userService.findById(user.getUid());
                 user.setPassword(u.getPassword());
             }
+            user.setUid(1);
             userService.save(user);
             logger.info("user has registered {}...",user.getName());
             attr.addFlashAttribute("ok","保存成功");
             return "redirect:/listusers";
         } catch  (Exception ex){
+            logger.info("user has registered failed {}...",user.getName());
             return "redirect:/edituser";
         }
     }

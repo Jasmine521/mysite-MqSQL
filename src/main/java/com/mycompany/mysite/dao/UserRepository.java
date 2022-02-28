@@ -9,11 +9,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author WIN11
  */
+@Repository
 public interface UserRepository extends JpaRepository<User,Integer>{
     @Query("select u from User u where account like ?1 or name like ?1 or "
             + "mobile like ?1 or email like ?1")

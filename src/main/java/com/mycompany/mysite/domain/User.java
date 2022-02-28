@@ -5,6 +5,10 @@
 package com.mycompany.mysite.domain;
 
 import com.sun.istack.NotNull;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -22,10 +26,11 @@ import javax.persistence.Table;
  * @author WIN11
  */
 @Entity
-@Table(name="users")
+@Table(name = "USERS")
 public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer uid;
     @Column(length=30,unique=true)
     @NotNull
